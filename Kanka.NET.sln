@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Kanka.NET", "Kanka.NET\Kanka.NET.fsproj", "{CA2CB331-04F6-4474-8983-C615EA6A87BF}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "tests", "tests\tests.fsproj", "{FB0CAF4E-E8F5-4C01-8CE1-8F026D2787ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA2CB331-04F6-4474-8983-C615EA6A87BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA2CB331-04F6-4474-8983-C615EA6A87BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA2CB331-04F6-4474-8983-C615EA6A87BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA2CB331-04F6-4474-8983-C615EA6A87BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB0CAF4E-E8F5-4C01-8CE1-8F026D2787ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB0CAF4E-E8F5-4C01-8CE1-8F026D2787ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB0CAF4E-E8F5-4C01-8CE1-8F026D2787ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB0CAF4E-E8F5-4C01-8CE1-8F026D2787ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
