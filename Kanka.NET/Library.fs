@@ -22,5 +22,5 @@ module Kanka =
           
         }
         |> Request.send
-        |> Response.toString(Some 1024)
+        |> Response.toJson
       
