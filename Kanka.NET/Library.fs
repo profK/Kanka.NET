@@ -24,16 +24,16 @@ module Kanka =
         |> Response.toJson
 
     let GetProfile() =
-        let url = api + "profile"
-        KankaGet url
+        api + "profile"
+        |> KankaGet 
 
     let GetCampaigns() =
-        let url = api + "campaigns"
-        KankaGet url
+        api + "campaigns"
+        |> KankaGet 
 
     let GetCampaign id =
-        let url = api + "campaigns/" + id
-        KankaGet url
+        api + "campaigns/" + id
+        |> KankaGet 
 
     let GetEntities campaignId =
         api + "campaigns/" + campaignId + "/entities"
@@ -41,6 +41,8 @@ module Kanka =
         
     let GetEntity campaignId entityId =
         api +  "campaigns/" + campaignId + "/entities/" + entityId
-        |> KankaGet  
+        |> KankaGet
+        
+    
         
    
