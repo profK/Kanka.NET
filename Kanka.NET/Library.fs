@@ -51,6 +51,18 @@ module Kanka =
         }
         |> Request.send
         |> toJson
+    let KankaPostImage  filepath imageName endpoint=
+        let url = api + endpoint
+        http {
+            POST url
+            AuthorizationBearer key
+            Accept "application/json"
+            multipart
+            filePart "image" filepath
+            textPart "name" imageName
+        }
+        |> Request.send
+        |> toJson 
 
     let GetProfile() =
         api + "profile"
@@ -90,7 +102,10 @@ module Kanka =
         api + "campaigns/" + campaignId + "/locations/" + locationId
         |> KankaPut data
     
-        
+    let DeleteLocation campaignId locationId=
+        api + "campaigns/" + campaignId + "/locations/" + locationId
+        |> KankaDelete
+    
     
         
    
