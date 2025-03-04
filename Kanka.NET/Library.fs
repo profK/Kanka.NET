@@ -22,6 +22,16 @@ module Kanka =
         }
         |> Request.send
         |> Response.toJson
+    let KankaPost endpoint data =
+        let url = api + endpoint
+        http {
+            POST "https://reqres.in/api/users"
+            CacheControl "no-cache"
+            body 
+            jsonSerialize data
+        }
+        |> Request.send
+        |> Response.toJson
 
     let GetProfile() =
         api + "profile"
@@ -42,6 +52,20 @@ module Kanka =
     let GetEntity campaignId entityId =
         api +  "campaigns/" + campaignId + "/entities/" + entityId
         |> KankaGet
+    let GetCharacters campaignId =
+        api + "campaigns/" + campaignId + "/characters"
+        |> KankaGet
+    let GetCharacter campaignId characterId =
+        api + "campaigns/" + campaignId + "/characters/" + characterId
+        |> KankaGet
+    let GetLocations campaignId =
+        api + "campaigns/" + campaignId + "/locations"
+        |> KankaGet
+    let GetLocation campaignId locationId =
+         api + "campaigns/" + campaignId + "/locations/" + locationId
+        |> KankaGet
+        
+    
         
     
         
