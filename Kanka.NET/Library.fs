@@ -25,7 +25,17 @@ module Kanka =
     let KankaPost endpoint data =
         let url = api + endpoint
         http {
-            POST "https://reqres.in/api/users"
+            POST url
+            CacheControl "no-cache"
+            body 
+            jsonSerialize data
+        }
+        |> Request.send
+        |> Response.toJson
+    let KankaPut endpoint data =
+        let url = api + endpoint
+        http {
+            PUT url
             CacheControl "no-cache"
             body 
             jsonSerialize data
@@ -64,7 +74,9 @@ module Kanka =
     let GetLocation campaignId locationId =
          api + "campaigns/" + campaignId + "/locations/" + locationId
         |> KankaGet
-        
+    let CreateLocation campaignId data=
+        api + "campaigns/" + campaignId + "/locations"
+        |> KankaPost data  
     
         
     
