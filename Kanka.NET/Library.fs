@@ -1,6 +1,7 @@
 ﻿namespace Kanka.NET
 
 open System
+open System.Text.Json
 open FsHttp
 open System.IO
 open FsHttp.Response
@@ -21,8 +22,8 @@ module Kanka =
             UserAgent "FsHttp"
         }
         |> Request.send
-        |> Response.toJson
-    let KankaPost endpoint data =
+        |> toJson
+    let KankaPost data endpoint=
         let url = api + endpoint
         http {
             POST url
@@ -31,8 +32,8 @@ module Kanka =
             jsonSerialize data
         }
         |> Request.send
-        |> Response.toJson
-    let KankaPut endpoint data =
+        |> toJson
+    let KankaPut  data  endpoint=
         let url = api + endpoint
         http {
             PUT url
@@ -41,7 +42,15 @@ module Kanka =
             jsonSerialize data
         }
         |> Request.send
-        |> Response.toJson
+        |> toJson
+    let KankaDelete  data  endpoint=
+        let url = api + endpoint
+        http {
+            DELETE url
+            CacheControl "no-cache"
+        }
+        |> Request.send
+        |> toJson
 
     let GetProfile() =
         api + "profile"
@@ -76,7 +85,10 @@ module Kanka =
         |> KankaGet
     let CreateLocation campaignId data=
         api + "campaigns/" + campaignId + "/locations"
-        |> KankaPost data  
+        |> KankaPost data
+    let UpdateLocation campaignId locationId data=
+        api + "campaigns/" + campaignId + "/locations/" + locationId
+        |> KankaPut data
     
         
     
