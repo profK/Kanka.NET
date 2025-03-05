@@ -106,6 +106,32 @@ module Kanka =
         api + "campaigns/" + campaignId + "/locations/" + locationId
         |> KankaDelete
     
-    
+    let GetMaps campaignId =
+        api + "campaigns/" + campaignId + "/maps"
+        |> KankaGet
+    let CreateMap campaignId data=
+        api + "campaigns/" + campaignId + "/maps"
+        |> KankaPost data
+    let GetMap campaignId mapId=
+        api + "campaigns/" + campaignId + "/maps/" + mapId
+        |> KankaGet  
+    let UpdateMap campaignId mapId data=
+        api + "campaigns/" + campaignId + "/maps/" + mapId
+        |> KankaPut data
+    let DeleteMap campaignId mapId=
+        api + "campaigns/" + campaignId + "/maps/" + mapId
+        |> KankaDelete
+    let GetMapMarkers campaignId mapId=
+        api + "campaigns/" + campaignId + "/maps/" + mapId + "/map_markers"
+        |> KankaGet
+    let CreateMapMarker campaignId mapId data= 
+        api + "campaigns/" + campaignId + "/maps/" + mapId + "/map_markers"
+        |> KankaPost data
+    let UpdateMapMarker campaignId mapId markerId data=
+        api + "campaigns/" + campaignId + "/maps/" + mapId + "/map_markers/" + markerId
+        |> KankaPut data
+    let DeleteMapMarker campaignId mapId markerId=
+        api + "campaigns/" + campaignId + "/maps/" + mapId + "/map_markers/" + markerId
+        |> KankaDelete
         
    
