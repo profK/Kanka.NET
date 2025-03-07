@@ -43,14 +43,15 @@ module Kanka =
         }
         |> Request.send
         |> toJson
+            
     let KankaDelete  data  endpoint=
-        let url = api + endpoint
-        http {
-            DELETE url
-            CacheControl "no-cache"
-        }
-        |> Request.send
-        |> toJson
+            let url = api + endpoint
+            http {
+                DELETE url
+                CacheControl "no-cache"
+            }
+            |> Request.send
+            |> toJson
     let KankaPostImage  filepath imageName endpoint=
         let url = api + endpoint
         let atpath = "@" + filepath
@@ -112,6 +113,15 @@ module Kanka =
       "campaigns/" + campaignId + "/locations/" + locationId
         |> KankaDelete
     
+    let GetMaps campaignId =
+      "campaigns/" + campaignId + "/maps"
+        |> KankaGet
+    let GetMapMarkers mapid=
+        "maps/" + mapid + "/markers"
+           |> KankaGet
+    let CreateMapMarker mapid data=
+        "maps/" + mapid + "/map_markers/"
+        |> KankaPost data
     
-        
-   
+    
+    

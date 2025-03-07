@@ -8,7 +8,7 @@ open System.Text.Json
 
 type Tests(output:ITestOutputHelper) =
    
-    
+    let campaignid = "308706"
     [<Fact>]
     member this.FetchProfile() =
            let profile = Kanka.GetProfile()
@@ -31,11 +31,16 @@ type Tests(output:ITestOutputHelper) =
            output.WriteLine $"Campaign:\n {campaign}"
            
        [<Fact>]
-       member this.CreateImage() =
+       member this.CreateMap() =
            let image =
                 Kanka.KankaPostImage 
                     "test_data/Waterdeep-reborn.png"
                     "MyImage"
-                    "campaigns/308706/images"
+                    $"campaigns/{campaignid}/images"
            output.WriteLine $"Image:\n {image}"
-       
+       [<Fact>]
+       member this.ListMaps() =
+           let list = 
+                Kanka.GetMaps campaignid
+           output.WriteLine $"Maps:\n {list}"
+                 
