@@ -60,7 +60,7 @@ module Kanka =
             Accept "*/*"
             UserAgent "FsHttp"
             multipart
-            filePart  "file" filepath
+            filePart filepath "file[]"
             textPart "visibility_id" "1" 
            
         }
