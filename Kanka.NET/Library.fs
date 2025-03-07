@@ -53,57 +53,63 @@ module Kanka =
         |> toJson
     let KankaPostImage  filepath imageName endpoint=
         let url = api + endpoint
+        let atpath = "@" + filepath
         http {
             POST url
             AuthorizationBearer key
-            Accept "application/json"
+            Accept "*/*"
+            UserAgent "FsHttp"
             multipart
-            filePart "image" filepath
-            textPart "name" imageName
+            filePart  "file" filepath
+            textPart "visibility_id" "1" 
+           
         }
         |> Request.send
-        |> toJson 
+        |> toJson
+         
+         
+        
 
     let GetProfile() =
-        api + "profile"
+        "profile"
         |> KankaGet 
 
     let GetCampaigns() =
-        api + "campaigns"
+        "campaigns"
         |> KankaGet 
 
     let GetCampaign id =
-        api + "campaigns/" + id
+        "campaigns/" + id
         |> KankaGet 
 
     let GetEntities campaignId =
-        api + "campaigns/" + campaignId + "/entities"
+        "campaigns/" + campaignId + "/entities"
         |> KankaGet 
         
     let GetEntity campaignId entityId =
-        api +  "campaigns/" + campaignId + "/entities/" + entityId
+       "campaigns/" + campaignId + "/entities/" + entityId
         |> KankaGet
     let GetCharacters campaignId =
-        api + "campaigns/" + campaignId + "/characters"
+      "campaigns/" + campaignId + "/characters"
         |> KankaGet
     let GetCharacter campaignId characterId =
-        api + "campaigns/" + campaignId + "/characters/" + characterId
+      "campaigns/" + campaignId + "/characters/" + characterId
         |> KankaGet
     let GetLocations campaignId =
-        api + "campaigns/" + campaignId + "/locations"
+      "campaigns/" + campaignId + "/locations"
         |> KankaGet
     let GetLocation campaignId locationId =
-         api + "campaigns/" + campaignId + "/locations/" + locationId
+       "campaigns/" + campaignId + "/locations/" + locationId
         |> KankaGet
     let CreateLocation campaignId data=
-        api + "campaigns/" + campaignId + "/locations"
+      "campaigns/" + campaignId + "/locations"
         |> KankaPost data
     let UpdateLocation campaignId locationId data=
-        api + "campaigns/" + campaignId + "/locations/" + locationId
+      "campaigns/" + campaignId + "/locations/" + locationId
         |> KankaPut data
     
     let DeleteLocation campaignId locationId=
-        api + "campaigns/" + campaignId + "/locations/" + locationId
+      "campaigns/" + campaignId + "/locations/" + locationId
         |> KankaDelete
     
     
