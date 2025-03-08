@@ -11,6 +11,10 @@
     <ItemGroup>
         <Compile Include="Tests.fs"/>
         <Compile Include="Program.fs"/>
+        <Content Include="test_data\Waterdeep_-_City_System.webp" />
+        <Content Include="test_data\Waterdeep-reborn.png">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>

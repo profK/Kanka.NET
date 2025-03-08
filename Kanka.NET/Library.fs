@@ -43,95 +43,85 @@ module Kanka =
         }
         |> Request.send
         |> toJson
+            
     let KankaDelete  data  endpoint=
-        let url = api + endpoint
-        http {
-            DELETE url
-            CacheControl "no-cache"
-        }
-        |> Request.send
-        |> toJson
+            let url = api + endpoint
+            http {
+                DELETE url
+                CacheControl "no-cache"
+            }
+            |> Request.send
+            |> toJson
     let KankaPostImage  filepath imageName endpoint=
         let url = api + endpoint
+        let atpath = "@" + filepath
         http {
             POST url
             AuthorizationBearer key
-            Accept "application/json"
+            Accept "*/*"
+            UserAgent "FsHttp"
             multipart
-            filePart "image" filepath
-            textPart "name" imageName
+            filePart filepath "file[]"
+            textPart "visibility_id" "1" 
+           
         }
         |> Request.send
-        |> toJson 
+        |> toJson
+         
+         
+        
 
     let GetProfile() =
-        api + "profile"
+        "profile"
         |> KankaGet 
 
     let GetCampaigns() =
-        api + "campaigns"
+        "campaigns"
         |> KankaGet 
 
     let GetCampaign id =
-        api + "campaigns/" + id
+        "campaigns/" + id
         |> KankaGet 
 
     let GetEntities campaignId =
-        api + "campaigns/" + campaignId + "/entities"
+        "campaigns/" + campaignId + "/entities"
         |> KankaGet 
         
     let GetEntity campaignId entityId =
-        api +  "campaigns/" + campaignId + "/entities/" + entityId
+       "campaigns/" + campaignId + "/entities/" + entityId
         |> KankaGet
     let GetCharacters campaignId =
-        api + "campaigns/" + campaignId + "/characters"
+      "campaigns/" + campaignId + "/characters"
         |> KankaGet
     let GetCharacter campaignId characterId =
-        api + "campaigns/" + campaignId + "/characters/" + characterId
+      "campaigns/" + campaignId + "/characters/" + characterId
         |> KankaGet
     let GetLocations campaignId =
-        api + "campaigns/" + campaignId + "/locations"
+      "campaigns/" + campaignId + "/locations"
         |> KankaGet
     let GetLocation campaignId locationId =
-         api + "campaigns/" + campaignId + "/locations/" + locationId
+       "campaigns/" + campaignId + "/locations/" + locationId
         |> KankaGet
     let CreateLocation campaignId data=
-        api + "campaigns/" + campaignId + "/locations"
+      "campaigns/" + campaignId + "/locations"
         |> KankaPost data
     let UpdateLocation campaignId locationId data=
-        api + "campaigns/" + campaignId + "/locations/" + locationId
+      "campaigns/" + campaignId + "/locations/" + locationId
         |> KankaPut data
     
     let DeleteLocation campaignId locationId=
-        api + "campaigns/" + campaignId + "/locations/" + locationId
+      "campaigns/" + campaignId + "/locations/" + locationId
         |> KankaDelete
     
     let GetMaps campaignId =
-        api + "campaigns/" + campaignId + "/maps"
+      "campaigns/" + campaignId + "/maps"
         |> KankaGet
-    let CreateMap campaignId data=
-        api + "campaigns/" + campaignId + "/maps"
+    let GetMapMarkers mapid=
+        "maps/" + mapid + "/markers"
+           |> KankaGet
+    let CreateMapMarker mapid data=
+        "maps/" + mapid + "/map_markers/"
         |> KankaPost data
-    let GetMap campaignId mapId=
-        api + "campaigns/" + campaignId + "/maps/" + mapId
-        |> KankaGet  
-    let UpdateMap campaignId mapId data=
-        api + "campaigns/" + campaignId + "/maps/" + mapId
-        |> KankaPut data
-    let DeleteMap campaignId mapId=
-        api + "campaigns/" + campaignId + "/maps/" + mapId
-        |> KankaDelete
-    let GetMapMarkers campaignId mapId=
-        api + "campaigns/" + campaignId + "/maps/" + mapId + "/map_markers"
-        |> KankaGet
-    let CreateMapMarker campaignId mapId data= 
-        api + "campaigns/" + campaignId + "/maps/" + mapId + "/map_markers"
-        |> KankaPost data
-    let UpdateMapMarker campaignId mapId markerId data=
-        api + "campaigns/" + campaignId + "/maps/" + mapId + "/map_markers/" + markerId
-        |> KankaPut data
-    let DeleteMapMarker campaignId mapId markerId=
-        api + "campaigns/" + campaignId + "/maps/" + mapId + "/map_markers/" + markerId
-        |> KankaDelete
-        
-   
+    
+    
+    
