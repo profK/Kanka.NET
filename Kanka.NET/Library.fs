@@ -7,6 +7,7 @@ open System.IO
 open FsHttp.Response
 
 module Kanka =
+    
     let key =
         use f = File.OpenText("kanka.txt")
         f.ReadToEnd() |> fun (x: string) -> x.Trim()
@@ -28,6 +29,7 @@ module Kanka =
         http {
             POST url
             CacheControl "no-cache"
+            AuthorizationBearer key
             body 
             jsonSerialize data
         }
@@ -122,9 +124,11 @@ module Kanka =
     let GetMapMarkers campaignID mapid=
         "campaigns/" + campaignID + "/maps/" + mapid + "/map_markers"
            |> KankaGet
-    let CreateMapMarker mapid data=
-        "maps/" + mapid + "/map_markers/"
-        |> KankaPost data
+    let CreateMapMarker campaignid mapid data=
+        let endpoint =
+            "campaigns/" + campaignid + "/maps/" + mapid + "/map_markers"
+        printfn $"{endpoint}"
+        KankaPost data endpoint
     
     
     
