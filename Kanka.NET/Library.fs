@@ -119,8 +119,8 @@ module Kanka =
     let GetMap campaignId mapId =
       "campaigns/" + campaignId + "/maps/" + mapId
         |> KankaGet
-    let GetMapMarkers mapid=
-        "maps/" + mapid + "/markers"
+    let GetMapMarkers campaignID mapid=
+        "campaigns/" + campaignID + "/maps/" + mapid + "/map_markers"
            |> KankaGet
     let CreateMapMarker mapid data=
         "maps/" + mapid + "/map_markers/"
