@@ -133,6 +133,9 @@ module Kanka =
         let endpoint =
             "campaigns/" + campaignid + "/maps/" + mapid + "/map_groups"
         KankaPost data endpoint
+    let GetMarkerGroups campaignid mapid=
+        "campaigns/" + campaignid + "/maps/" + mapid + "/map_groups"
+        |> KankaGet 
     
     
     
