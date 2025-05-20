@@ -6,7 +6,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Library.fs"/>
+        <Compile Include="Data.fs" />
+        <Compile Include="Library.fs" />
+        <Compile Include="JSONIO.fs" />
+        <Compile Include="MarkerGroup.fs" />
+        <Compile Include="MapMarkers.fs" />
+        <Compile Include="Maps.fs" />
+        <Compile Include="Campaigns.fs" />
         <Content Include="kanka.txt">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
