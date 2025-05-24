@@ -2,6 +2,7 @@
 
 open System
 open System.Text.Json
+open System.Threading
 open FsHttp
 open System.IO
 open FsHttp.Response
@@ -14,6 +15,19 @@ module Kanka =
 
     let api = "https://api.kanka.io/1.0/"
 
+    // HTTP API functions. Automatically throttles requests to avoid hitting the rate limit.
+    let Throttle (result: Response) =
+        match result.headers.TryGetValues("X-RateLimit-Remaining") with
+        | true, values ->
+            let remaining = values |> Seq.head |> int
+            printfn "Requests remaining: %d" remaining
+            if remaining = 0 then
+                printfn "Rate limit reached. Waiting..."
+                Thread.Sleep(1000 * 60) // Wait for 1 minute
+        | _ ->
+            printfn "Rate limit information not available" 
+        result
+        
     let KankaGet endpoint =
         let url = api + endpoint
         http {
@@ -23,6 +37,7 @@ module Kanka =
             UserAgent "FsHttp"
         }
         |> Request.send
+        |> Throttle
         |> toJson
     let KankaPost data endpoint=
         let url = api + endpoint
@@ -34,6 +49,7 @@ module Kanka =
             jsonSerialize data
         }
         |> Request.send
+        |> Throttle
         |> toJson
     let KankaPut  data  endpoint=
         let url = api + endpoint
@@ -44,6 +60,7 @@ module Kanka =
             jsonSerialize data
         }
         |> Request.send
+        |> Throttle
         |> toJson
             
     let KankaDelete  data  endpoint=
@@ -53,6 +70,7 @@ module Kanka =
                 CacheControl "no-cache"
             }
             |> Request.send
+            |> Throttle
             |> toJson
     let KankaPostImage  filepath imageName endpoint=
         let url = api + endpoint
@@ -68,6 +86,7 @@ module Kanka =
            
         }
         |> Request.send
+        |> Throttle
         |> toJson
          
          
